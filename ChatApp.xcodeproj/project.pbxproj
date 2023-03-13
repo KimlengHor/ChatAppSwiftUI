@@ -10,7 +10,7 @@
 		71AAF3E429BEAADF000E82E6 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 71AAF3E329BEAADF000E82E6 /* FirebaseAuth */; };
 		71AAF3E629BEAADF000E82E6 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 71AAF3E529BEAADF000E82E6 /* FirebaseStorage */; };
 		71AAF3E829BEAD70000E82E6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 71AAF3E729BEAD6F000E82E6 /* GoogleService-Info.plist */; };
-		71E1122829BD3BE000B82144 /* ChatAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E1122729BD3BE000B82144 /* ChatAppApp.swift */; };
+		71E1122829BD3BE000B82144 /* ChatApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E1122729BD3BE000B82144 /* ChatApp.swift */; };
 		71E1122A29BD3BE000B82144 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E1122929BD3BE000B82144 /* LoginView.swift */; };
 		71E1122C29BD3BE200B82144 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71E1122B29BD3BE200B82144 /* Assets.xcassets */; };
 		71E1122F29BD3BE200B82144 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71E1122E29BD3BE200B82144 /* Preview Assets.xcassets */; };
@@ -39,7 +39,7 @@
 /* Begin PBXFileReference section */
 		71AAF3E729BEAD6F000E82E6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		71E1122429BD3BE000B82144 /* ChatApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		71E1122729BD3BE000B82144 /* ChatAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatAppApp.swift; sourceTree = "<group>"; };
+		71E1122729BD3BE000B82144 /* ChatApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatApp.swift; sourceTree = "<group>"; };
 		71E1122929BD3BE000B82144 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		71E1122B29BD3BE200B82144 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		71E1122E29BD3BE200B82144 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -100,7 +100,7 @@
 		71E1122629BD3BE000B82144 /* ChatApp */ = {
 			isa = PBXGroup;
 			children = (
-				71E1122729BD3BE000B82144 /* ChatAppApp.swift */,
+				71E1122729BD3BE000B82144 /* ChatApp.swift */,
 				71AAF3E729BEAD6F000E82E6 /* GoogleService-Info.plist */,
 				71E1122929BD3BE000B82144 /* LoginView.swift */,
 				71E1122B29BD3BE200B82144 /* Assets.xcassets */,
@@ -273,7 +273,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				71E1122A29BD3BE000B82144 /* LoginView.swift in Sources */,
-				71E1122829BD3BE000B82144 /* ChatAppApp.swift in Sources */,
+				71E1122829BD3BE000B82144 /* ChatApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
