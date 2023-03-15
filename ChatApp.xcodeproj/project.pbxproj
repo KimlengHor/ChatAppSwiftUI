@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7134AB6729C20DF50005B443 /* MainMessagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7134AB6629C20DF50005B443 /* MainMessagesView.swift */; };
 		71AAF3E829BEAD70000E82E6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 71AAF3E729BEAD6F000E82E6 /* GoogleService-Info.plist */; };
 		71D4240D29C0C68F001AA85C /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D4240C29C0C68E001AA85C /* ImagePicker.swift */; };
 		71D4241029C0CDD4001AA85C /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 71D4240F29C0CDD4001AA85C /* FirebaseAuth */; };
@@ -39,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7134AB6629C20DF50005B443 /* MainMessagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMessagesView.swift; sourceTree = "<group>"; };
 		71AAF3E729BEAD6F000E82E6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		71D4240C29C0C68E001AA85C /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		71E1122429BD3BE000B82144 /* ChatApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -81,6 +83,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7134AB6329C20DAD0005B443 /* MainMessages */ = {
+			isa = PBXGroup;
+			children = (
+				7134AB6629C20DF50005B443 /* MainMessagesView.swift */,
+			);
+			path = MainMessages;
+			sourceTree = "<group>";
+		};
 		71E1121B29BD3BE000B82144 = {
 			isa = PBXGroup;
 			children = (
@@ -104,6 +114,7 @@
 		71E1122629BD3BE000B82144 /* ChatApp */ = {
 			isa = PBXGroup;
 			children = (
+				7134AB6329C20DAD0005B443 /* MainMessages */,
 				71E1122729BD3BE000B82144 /* ChatApp.swift */,
 				71AAF3E729BEAD6F000E82E6 /* GoogleService-Info.plist */,
 				71E1122929BD3BE000B82144 /* LoginView.swift */,
@@ -279,6 +290,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				71D4240D29C0C68F001AA85C /* ImagePicker.swift in Sources */,
+				7134AB6729C20DF50005B443 /* MainMessagesView.swift in Sources */,
 				71E1122A29BD3BE000B82144 /* LoginView.swift in Sources */,
 				71E1122829BD3BE000B82144 /* ChatApp.swift in Sources */,
 			);
