@@ -8,20 +8,18 @@
 import SwiftUI
 import SDWebImageSwiftUI
 
-struct ChatUser {
-    let uid , email, profileImageUrl: String
-}
-
 class MainMessageViewModel: ObservableObject {
     
     @Published var errorMessage = "";
     @Published var chatUser: ChatUser?
+    @Published var isUserCurrentlyLoggedOut = false
     
     init() {
+        self.isUserCurrentlyLoggedOut = FirebaseManager.shared.auth.currentUser?.uid == nil
         fetchCurrentUser()
     }
     
-    private func fetchCurrentUser() {
+    func fetchCurrentUser() {
         guard let uid = FirebaseManager.shared.auth.currentUser?.uid else {
             self.errorMessage = "Could not find firebase uid"
             return
@@ -34,21 +32,23 @@ class MainMessageViewModel: ObservableObject {
             }
             
             guard let data = snapshot?.data() else { return }
-            
-            let uid = data["uid"] as? String ?? ""
-            let email = data["email"] as? String ?? ""
-            let profileImageUrl = data["profileImageUrl"] as? String ?? ""
-            
-            let chatUser = ChatUser(uid: uid, email: email, profileImageUrl: profileImageUrl)
-            
-            self.chatUser = chatUser
+                
+            self.chatUser = .init(data: data)
         }
+    }
+    
+    func handleSignOut() {
+        isUserCurrentlyLoggedOut.toggle()
+        try? FirebaseManager.shared.auth.signOut()
     }
 }
 
 struct MainMessagesView: View {
     
     @State var shouldShowLogOutOptions = false
+    @State var shouldShowNewMessageScreen = false
+    @State var shouldNavigateToChatLogView = false
+    @State var chatUser: ChatUser?
     
     @ObservedObject private var vm = MainMessageViewModel()
     
@@ -57,6 +57,10 @@ struct MainMessagesView: View {
             VStack {
                 customNavBar
                 messagesView
+                
+                NavigationLink("", isActive: $shouldNavigateToChatLogView) {
+                    ChatLogView(chatUser: chatUser)
+                }
             }
             .overlay(
                 newMessageButton, alignment: .bottom)
@@ -77,8 +81,6 @@ struct MainMessagesView: View {
                     .stroke(Color(.label), lineWidth: 1))
                 .shadow(radius: 5)
             
-//            Image(systemName: "person.fill")
-//                .font(.system(size: 34, weight: .heavy))
             VStack(alignment: .leading, spacing: 4) {
                 let email = vm.chatUser?.email.replacingOccurrences(of: "@yahoo.com", with: "") ?? ""
                 Text(email)
@@ -104,8 +106,14 @@ struct MainMessagesView: View {
         .padding()
         .actionSheet(isPresented: $shouldShowLogOutOptions) {
             .init(title: Text("Settings"), message: Text("What do you want to do?"), buttons: [.destructive(Text("Sign Out"), action: {
-                print("handle sign out")
+                vm.handleSignOut()
             }), .cancel()])
+        }
+        .fullScreenCover(isPresented: $vm.isUserCurrentlyLoggedOut) {
+            LoginView(didCompleteLoginProcess: {
+                self.vm.isUserCurrentlyLoggedOut = false
+                self.vm.fetchCurrentUser()
+            })
         }
     }
     
@@ -113,24 +121,29 @@ struct MainMessagesView: View {
         ScrollView {
             ForEach(0..<10, id: \.self) { num in
                 VStack {
-                    HStack(spacing: 16){
-                        Image(systemName: "person.fill")
-                            .font(.system(size: 32))
-                            .padding(8)
-                            .overlay(RoundedRectangle(cornerRadius: 44)
-                                .stroke(Color(.label), lineWidth: 1)
-                            )
-                        VStack(alignment: .leading) {
-                            Text("Username")
-                                .font(.system(size: 16, weight: .bold))
-                            Text("Message sent to user")
-                                .font(.system(size: 14))
-                                .foregroundColor(Color(.lightGray))
+                    NavigationLink {
+                        Text("Destination")
+                    } label: {
+                        HStack(spacing: 16){
+                            Image(systemName: "person.fill")
+                                .font(.system(size: 32))
+                                .padding(8)
+                                .overlay(RoundedRectangle(cornerRadius: 44)
+                                    .stroke(Color(.label), lineWidth: 1)
+                                )
+                            VStack(alignment: .leading) {
+                                Text("Username")
+                                    .font(.system(size: 16, weight: .bold))
+                                Text("Message sent to user")
+                                    .font(.system(size: 14))
+                                    .foregroundColor(Color(.lightGray))
+                            }
+                            Spacer()
+                            Text("22nd")
+                                .font(.system(size: 14, weight: .semibold))
                         }
-                        Spacer()
-                        Text("22nd")
-                            .font(.system(size: 14, weight: .semibold))
                     }
+
                     Divider()
                         .padding(.vertical, 8)
                 }
@@ -143,7 +156,7 @@ struct MainMessagesView: View {
     
     private var newMessageButton: some View {
         Button {
-            
+            shouldShowNewMessageScreen.toggle()
         } label: {
             HStack {
                 Spacer()
@@ -158,6 +171,26 @@ struct MainMessagesView: View {
             .padding(.horizontal)
             .shadow(radius: 15)
         }
+        .fullScreenCover(isPresented: $shouldShowNewMessageScreen) {
+            CreateNewMessageView { user in
+                self.shouldNavigateToChatLogView.toggle()
+                self.chatUser = user
+            }
+        }
+    }
+}
+
+struct ChatLogView: View {
+    
+    let chatUser: ChatUser?
+    
+    var body: some View {
+        ScrollView {
+            ForEach(0..<10) { num in
+                Text("Fake message for now")
+            }
+        }.navigationTitle(chatUser?.email ?? "")
+            .navigationBarTitleDisplayMode(.inline)
     }
 }
 
